@@ -27,6 +27,8 @@ mapPCAPLS<-function(newData, roplsObject)
     }
     # Scale the new data based on the center and sd of the old data
     X<-scale(newData,center = roplsObject@xMeanVn,roplsObject@xSdVn)
+    # calculate orthogonal scores
+    Tortho<-X %*% roplsObject@orthoWeightMN %*% solve(t(roplsObject@orthoWeightMN) %*% roplsObject@orthoWeightMN)
     # Calculate orthogonal loading
     Portho<- t(X) %*% Tortho %*% solve(t(Tortho) %*% Tortho) 
     # reconstruct the data based on the X=TP'
