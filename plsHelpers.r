@@ -29,8 +29,6 @@ mapPCAPLS<-function(newData, roplsObject)
     X<-scale(newData,center = roplsObject@xMeanVn,roplsObject@xSdVn)
     # calculate orthogonal scores
     Tortho<-X %*% roplsObject@orthoWeightMN %*% solve(t(roplsObject@orthoWeightMN) %*% roplsObject@orthoWeightMN)
-    # Calculate orthogonal loading
-    Portho<- t(X) %*% Tortho %*% solve(t(Tortho) %*% Tortho) 
     # reconstruct the data based on the X=TP'
     # and substract the data fronm the original matrix
     xtest <- X - Tortho %*% t(Portho)
